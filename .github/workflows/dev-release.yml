@@ -1,0 +1,51 @@
+name: Dev Release
+
+on:
+  push:
+    branches: [develop]
+
+permissions:
+  contents: write
+
+jobs:
+  dev-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Generate dev version
+        id: version
+        run: |
+          BASE_VERSION=$(node -p "require('./package.json').version")
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          DEV_VERSION="${BASE_VERSION}-dev.${SHORT_SHA}"
+          echo "version=${DEV_VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Delete previous dev release
+        run: gh release delete dev --yes --cleanup-tag || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create dev pre-release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: dev
+          name: "🧪 Dev Preview — ${{ steps.version.outputs.version }}"
+          body: |
+            **Preview build** from `develop` branch.
+
+            Commit: ${{ github.sha }}
+            Version: `${{ steps.version.outputs.version }}`
+
+            > ⚠️ This is automatically updated on every push to `develop`.
+            > Enable "Show beta versions" in HACS to install.
+          prerelease: true
+          files: dist/bayrol-pool-card.js
