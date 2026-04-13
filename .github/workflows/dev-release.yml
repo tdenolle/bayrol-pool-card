@@ -25,8 +25,8 @@ jobs:
         id: version
         run: |
           BASE_VERSION=$(node -p "require('./package.json').version")
-          SHORT_SHA=$(git rev-parse --short HEAD)
-          DEV_VERSION="${BASE_VERSION}-dev.${SHORT_SHA}"
+          DEV_TIMESTAMP=$(date -u +"%Y%m%d%H%M%S")
+          DEV_VERSION="${BASE_VERSION}-dev.${DEV_TIMESTAMP}"
           echo "version=${DEV_VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Delete previous dev release

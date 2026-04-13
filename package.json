@@ -1,6 +1,6 @@
 {
   "name": "bayrol-pool-card",
-  "version": "0.1.0",
+  "version": "2026.4.0",
   "description": "Custom Lovelace cards for Bayrol Pool Access — dashboard & chart cards for Home Assistant",
   "main": "dist/bayrol-pool-card.js",
   "scripts": {
