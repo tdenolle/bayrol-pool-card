@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "lib": ["ES2021", "DOM", "DOM.Iterable"],
+    "declaration": false,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*.ts"]
+}

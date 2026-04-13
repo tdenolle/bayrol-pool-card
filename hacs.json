@@ -1,0 +1,8 @@
+{
+  "name": "Bayrol Pool Card",
+  "render_readme": true,
+  "domains": ["sensor", "switch", "select", "climate"],
+  "country": ["FR"],
+  "homeassistant": "2024.1.0",
+  "filename": "bayrol-pool-card.js"
+}
