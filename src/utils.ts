@@ -24,12 +24,49 @@ export const POOL_ENTITY_KEYS = {
 export type PoolEntityKey = keyof typeof POOL_ENTITY_KEYS;
 
 /**
+ * Normalize a string the same way as the Python bridge's norm() function.
+ * Removes all non-alphanumeric characters (including - and _) and lowercases.
+ */
+export function norm(s: string): string {
+  return s.replace(/[\W_]/g, "").toLowerCase();
+}
+
+/**
  * Build a full HA entity_id from the device serial and a pool entity key.
- * Format: sensor.bayrol_poolaccess_{serial}_{key}
+ * Matches the unique_id format from bayrol-poolaccess-mqtt:
+ *   unique_id = norm(manufacturer) + "_" + norm(device.id) + "_" + key
+ * HA typically uses unique_id as entity_id: sensor.bayrol_{normalizedSerial}_{key}
  */
 export function buildEntityId(serial: string, key: string, domain = "sensor"): string {
-  const normalizedSerial = serial.toLowerCase().replace(/-/g, "_");
-  return `${domain}.bayrol_poolaccess_${normalizedSerial}_${key}`;
+  return `${domain}.${norm("Bayrol")}_${norm(serial)}_${key}`;
+}
+
+/**
+ * Try to find an entity by scanning hass.states for a matching suffix pattern.
+ * Fallback when buildEntityId doesn't match (e.g. user renamed entities).
+ */
+export function findEntityByKey(
+  states: Record<string, { entity_id: string }>,
+  serial: string,
+  key: string,
+  domain = "sensor"
+): string | undefined {
+  // Try exact match first
+  const exactId = buildEntityId(serial, key, domain);
+  if (states[exactId]) return exactId;
+
+  // Fuzzy: search for entities ending with the key that contain the normalized serial
+  const normalizedSerial = norm(serial);
+  for (const entityId of Object.keys(states)) {
+    if (
+      entityId.startsWith(`${domain}.`) &&
+      entityId.includes(normalizedSerial) &&
+      entityId.endsWith(`_${key}`)
+    ) {
+      return entityId;
+    }
+  }
+  return undefined;
 }
 
 /**

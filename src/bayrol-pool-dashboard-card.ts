@@ -2,7 +2,7 @@ import { LitElement, html, nothing, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { cardStyles } from "./styles";
 import { HomeAssistant, HassEntity, LovelaceCardConfig } from "./types";
-import { buildEntityId, parseNumericState, getPhColor, getOrpColor } from "./utils";
+import { findEntityByKey, parseNumericState, getPhColor, getOrpColor } from "./utils";
 
 interface BayrolPoolDashboardConfig extends LovelaceCardConfig {
   title?: string;
@@ -58,12 +58,19 @@ export class BayrolPoolDashboardCard extends LitElement {
 
   private _getEntity(key: string, domain = "sensor"): HassEntity | undefined {
     if (!this.hass || !this._config) return undefined;
+    // Allow full override via entities map
+    const entities = this._config.entities as Record<string, string> | undefined;
+    if (entities && entities[key]) {
+      return this.hass.states[entities[key]];
+    }
     // Allow override via entity_prefix
     const prefix = this._config.entity_prefix;
-    const entityId = prefix
-      ? `${domain}.${prefix}_${key}`
-      : buildEntityId(this._config.device_serial, key, domain);
-    return this.hass.states[entityId];
+    if (prefix) {
+      return this.hass.states[`${domain}.${prefix}_${key}`];
+    }
+    // Auto-detect from device_serial
+    const entityId = findEntityByKey(this.hass.states, this._config.device_serial, key, domain);
+    return entityId ? this.hass.states[entityId] : undefined;
   }
 
   private _isOnline(): boolean {

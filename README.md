@@ -10,7 +10,7 @@ Full pool overview: temperature, pH, ORP, salt, status, and equipment controls.
 
 ```yaml
 type: custom:bayrol-pool-dashboard-card
-device_serial: "22ASE2-00841"
+device_serial: "YOUR_SERIAL"
 title: Ma Piscine          # optional
 show_equipment: true       # optional (default: true)
 ```
@@ -21,7 +21,7 @@ Historical chart for any pool entity with period selector (6h / 24h / 7d / 30d).
 
 ```yaml
 type: custom:bayrol-pool-chart-card
-device_serial: "22ASE2-00841"
+device_serial: "YOUR_SERIAL"
 entity_key: temperature    # matches entity key from bayrol-poolaccess-mqtt
 title: Température         # optional
 unit: "°C"                 # optional (auto-detected from entity)
@@ -34,21 +34,21 @@ Multiple chart cards can be combined in a HA grid/stack:
 type: vertical-stack
 cards:
   - type: custom:bayrol-pool-dashboard-card
-    device_serial: "22ASE2-00841"
+    device_serial: "YOUR_SERIAL"
   - type: horizontal-stack
     cards:
       - type: custom:bayrol-pool-chart-card
-        device_serial: "22ASE2-00841"
+        device_serial: "YOUR_SERIAL"
         entity_key: temperature
         title: Température
         color: "#ff9800"
       - type: custom:bayrol-pool-chart-card
-        device_serial: "22ASE2-00841"
+        device_serial: "YOUR_SERIAL"
         entity_key: ph
         title: pH
         color: "#66bb6a"
   - type: custom:bayrol-pool-chart-card
-    device_serial: "22ASE2-00841"
+    device_serial: "YOUR_SERIAL"
     entity_key: mv_se
     title: ORP / Redox
     color: "#4fc3f7"

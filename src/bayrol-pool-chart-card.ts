@@ -2,7 +2,7 @@ import { LitElement, html, nothing, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { chartCardStyles } from "./styles";
 import { HomeAssistant, HassEntity, LovelaceCardConfig } from "./types";
-import { buildEntityId, parseNumericState, getPhColor, getOrpColor } from "./utils";
+import { findEntityByKey, parseNumericState, getPhColor, getOrpColor } from "./utils";
 
 interface BayrolPoolChartConfig extends LovelaceCardConfig {
   title?: string;
@@ -72,17 +72,22 @@ export class BayrolPoolChartCard extends LitElement {
   }
 
   private _getEntityId(): string {
-    if (!this._config) return "";
+    if (!this._config || !this.hass) return "";
+    // Allow direct entity_id override
+    if (this._config.entity_id) return this._config.entity_id as string;
     const prefix = this._config.entity_prefix;
     const domain = this._config.entity_domain || "sensor";
-    return prefix
-      ? `${domain}.${prefix}_${this._config.entity_key}`
-      : buildEntityId(this._config.device_serial, this._config.entity_key, domain);
+    if (prefix) {
+      return `${domain}.${prefix}_${this._config.entity_key}`;
+    }
+    // Auto-detect from device_serial
+    return findEntityByKey(this.hass.states, this._config.device_serial, this._config.entity_key, domain) || "";
   }
 
   private _getEntity(): HassEntity | undefined {
     if (!this.hass) return undefined;
-    return this.hass.states[this._getEntityId()];
+    const id = this._getEntityId();
+    return id ? this.hass.states[id] : undefined;
   }
 
   private async _fetchHistory(): Promise<void> {

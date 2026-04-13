@@ -26,5 +26,5 @@ Format **CalVer** : `ANNEE.MOIS.INCREMENT` (ex: `2026.4.0`, `2026.4.1`, ...)
 
 ## Branches
 
-- `main` : releases stables (tags `vANNEE.MOIS.INCREMENT`)
+- `main` : releases stables (tags `ANNEE.MOIS.INCREMENT`)
 - `develop` : preview/dev (pre-release automatique)
