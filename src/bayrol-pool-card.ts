@@ -8,8 +8,9 @@
 
 import "./bayrol-pool-dashboard-card";
 import "./bayrol-pool-chart-card";
+import "./bayrol-pool-messages-card";
 
-const CARD_VERSION = "0.1.0";
+const CARD_VERSION = "2026.4.0";
 
 /* eslint-disable no-console */
 console.info(
@@ -33,6 +34,13 @@ console.info(
     type: "bayrol-pool-chart-card",
     name: "Bayrol Pool Chart",
     description: "Graphique historique pour n'importe quelle entité Bayrol Pool Access.",
+    preview: true,
+    documentationURL: "https://github.com/tdenolle/bayrol-pool-card",
+  },
+  {
+    type: "bayrol-pool-messages-card",
+    name: "Bayrol Pool Messages",
+    description: "Affiche les messages et alertes de votre Bayrol Pool Access.",
     preview: true,
     documentationURL: "https://github.com/tdenolle/bayrol-pool-card",
   },
