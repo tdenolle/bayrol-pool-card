@@ -28,7 +28,19 @@ unit: "°C"                 # optional (auto-detected from entity)
 color: "#ff9800"           # optional
 ```
 
-Multiple chart cards can be combined in a HA grid/stack:
+### `bayrol-pool-messages-card`
+
+Displays pool alerts and messages using native `ha-alert` components.
+
+```yaml
+type: custom:bayrol-pool-messages-card
+device_serial: "YOUR_SERIAL"
+title: Messages Piscine    # optional
+```
+
+### Full dashboard example
+
+Multiple cards can be combined in a HA grid/stack:
 
 ```yaml
 type: vertical-stack
@@ -52,6 +64,9 @@ cards:
     entity_key: mv_se
     title: ORP / Redox
     color: "#4fc3f7"
+  - type: custom:bayrol-pool-messages-card
+    device_serial: "YOUR_SERIAL"
+    title: Messages
 ```
 
 ## Installation

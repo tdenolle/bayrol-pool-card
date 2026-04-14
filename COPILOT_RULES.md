@@ -28,3 +28,9 @@ Format **CalVer** : `ANNEE.MOIS.INCREMENT` (ex: `2026.4.0`, `2026.4.1`, ...)
 
 - `main` : releases stables (tags `ANNEE.MOIS.INCREMENT`)
 - `develop` : preview/dev (pre-release automatique)
+
+## Documentation
+
+- Mettre à jour le **README.md** à chaque ajout, modification ou suppression de carte
+- Sections à maintenir synchronisées : liste des cartes, exemples YAML, exemple dashboard complet
+- Vérifier que le README reflète l'état actuel du code avant chaque push sur `develop` ou `main`
