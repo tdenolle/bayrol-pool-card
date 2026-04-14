@@ -26,3 +26,13 @@ jobs:
         with:
           name: bayrol-pool-card
           path: dist/bayrol-pool-card.js
+
+  hacs-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: HACS validation
+        uses: hacs/action@main
+        with:
+          category: plugin
