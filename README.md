@@ -1,6 +1,6 @@
 # Bayrol Pool Card
 
-![Bayrol Pool Card](docs/banner.svg)
+![Bayrol Pool Card](docs/banner.png)
 
 Custom Lovelace cards for [Bayrol Pool Access](https://github.com/tdenolle/bayrol-poolaccess-mqtt) — integrate your pool data into any Home Assistant dashboard.
 
