@@ -6,16 +6,13 @@ on:
   pull_request:
     branches: [main, develop]
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -27,7 +24,7 @@ jobs:
       - run: npm run build
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: bayrol-pool-card
           path: dist/bayrol-pool-card.js
@@ -35,7 +32,7 @@ jobs:
   hacs-validation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: HACS validation
         uses: hacs/action@main
