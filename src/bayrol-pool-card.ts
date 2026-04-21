@@ -2,12 +2,14 @@
  * Bayrol Pool Card – Custom Lovelace cards for Bayrol Pool Access
  *
  * Cards:
- *   - bayrol-pool-dashboard-card : Full pool overview (metrics + equipment)
- *   - bayrol-pool-chart-card     : Historical chart for any pool entity
+ *   - bayrol-pool-dashboard-card   : Full pool overview (metrics + equipment)
+ *   - bayrol-pool-chart-card       : Historical chart for any pool entity
+ *   - bayrol-pool-temp-chart-card  : Temperature + filtration status chart
  */
 
 import "./bayrol-pool-dashboard-card";
 import "./bayrol-pool-chart-card";
+import "./bayrol-pool-temp-chart-card";
 import "./bayrol-pool-messages-card";
 
 const CARD_VERSION = "2026.4.0";
@@ -34,6 +36,13 @@ console.info(
     type: "bayrol-pool-chart-card",
     name: "Bayrol Pool Chart",
     description: "Graphique historique pour n'importe quelle entité Bayrol Pool Access.",
+    preview: true,
+    documentationURL: "https://github.com/tdenolle/bayrol-pool-card",
+  },
+  {
+    type: "bayrol-pool-temp-chart-card",
+    name: "Bayrol Pool Temperature Chart",
+    description: "Température avec statut de filtration — met en avant les périodes sans filtration.",
     preview: true,
     documentationURL: "https://github.com/tdenolle/bayrol-pool-card",
   },

@@ -40,6 +40,18 @@ device_serial: "YOUR_SERIAL"
 title: Messages Piscine    # optional
 ```
 
+### `bayrol-pool-temp-chart-card`
+
+Temperature chart with filtration status overlay. Highlights periods when filtration is off — temperature readings are unreliable during these periods.
+
+```yaml
+type: custom:bayrol-pool-temp-chart-card
+device_serial: "YOUR_SERIAL"
+title: Température         # optional
+color: "#03a9f4"           # optional (temperature line color)
+filtration_off_color: "rgba(244, 67, 54, 0.15)"  # optional (background for filtration off)
+```
+
 ### Full dashboard example
 
 Multiple cards can be combined in a HA grid/stack:
@@ -69,6 +81,9 @@ cards:
   - type: custom:bayrol-pool-messages-card
     device_serial: "YOUR_SERIAL"
     title: Messages
+  - type: custom:bayrol-pool-temp-chart-card
+    device_serial: "YOUR_SERIAL"
+    title: Température & Filtration
 ```
 
 ## Installation
