@@ -12,7 +12,8 @@ import "./bayrol-pool-chart-card";
 import "./bayrol-pool-temp-chart-card";
 import "./bayrol-pool-messages-card";
 
-const CARD_VERSION = "2026.4.0";
+declare const __VERSION__: string;
+const CARD_VERSION = __VERSION__;
 
 /* eslint-disable no-console */
 console.info(
