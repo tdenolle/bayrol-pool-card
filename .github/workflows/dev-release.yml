@@ -22,7 +22,6 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run build
 
       - name: Generate dev version
         id: version
@@ -31,6 +30,9 @@ jobs:
           DEV_TIMESTAMP=$(date -u +"%Y%m%d%H%M%S")
           DEV_VERSION="${BASE_VERSION}-dev.${DEV_TIMESTAMP}"
           echo "version=${DEV_VERSION}" >> "$GITHUB_OUTPUT"
+          npm version "$DEV_VERSION" --no-git-tag-version
+
+      - run: npm run build
 
       - name: Delete previous dev release
         run: gh release delete dev --yes --cleanup-tag || true
