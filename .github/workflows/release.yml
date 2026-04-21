@@ -20,6 +20,10 @@ jobs:
           cache: npm
 
       - run: npm ci
+
+      - name: Set version from tag
+        run: npm version "${GITHUB_REF_NAME}" --no-git-tag-version
+
       - run: npm run build
 
       - name: Create GitHub Release
