@@ -74,10 +74,10 @@ jobs:
               --label "auto-sync"
           fi
 
-          # Auto-merge (requires checks to pass first)
+          # Enable auto-merge (will merge once CI checks pass on the PR)
           PR_NUMBER=$(gh pr list --base main --head develop --state open --json number --jq '.[0].number')
           if [ -n "$PR_NUMBER" ]; then
-            gh pr merge "$PR_NUMBER" --merge --admin --delete-branch=false
+            gh pr merge "$PR_NUMBER" --merge --auto --delete-branch=false
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
