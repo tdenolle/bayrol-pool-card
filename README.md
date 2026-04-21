@@ -17,6 +17,8 @@ title: Ma Piscine          # optional
 show_equipment: true       # optional (default: true)
 ```
 
+![Dashboard Card Preview](docs/preview-dashboard.svg)
+
 ### `bayrol-pool-chart-card`
 
 Historical chart for any pool entity with period selector (6h / 24h / 7d / 30d).
@@ -30,6 +32,8 @@ unit: "°C"                 # optional (auto-detected from entity)
 color: "#ff9800"           # optional
 ```
 
+![Chart Card Preview](docs/preview-chart.svg)
+
 ### `bayrol-pool-messages-card`
 
 Displays pool alerts and messages using native `ha-alert` components.
@@ -39,6 +43,22 @@ type: custom:bayrol-pool-messages-card
 device_serial: "YOUR_SERIAL"
 title: Messages Piscine    # optional
 ```
+
+![Messages Card Preview](docs/preview-messages.svg)
+
+### `bayrol-pool-temp-chart-card`
+
+Temperature chart with filtration status overlay. Highlights periods when filtration is off — temperature readings are unreliable during these periods.
+
+```yaml
+type: custom:bayrol-pool-temp-chart-card
+device_serial: "YOUR_SERIAL"
+title: Température         # optional
+color: "#03a9f4"           # optional (temperature line color)
+filtration_off_color: "rgba(244, 67, 54, 0.15)"  # optional (background for filtration off)
+```
+
+![Temperature Chart Card Preview](docs/preview-temp-chart.svg)
 
 ### Full dashboard example
 
@@ -69,6 +89,9 @@ cards:
   - type: custom:bayrol-pool-messages-card
     device_serial: "YOUR_SERIAL"
     title: Messages
+  - type: custom:bayrol-pool-temp-chart-card
+    device_serial: "YOUR_SERIAL"
+    title: Température & Filtration
 ```
 
 ## Installation

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="340" viewBox="0 0 480 340">
+  <!-- Card background -->
+  <rect width="480" height="340" rx="12" fill="#1c1c1c"/>
+
+  <!-- Header -->
+  <text x="20" y="36" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#e0e0e0">Ma Piscine</text>
+  <rect x="390" y="18" rx="10" width="70" height="24" fill="#4caf50"/>
+  <text x="425" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="white">ONLINE</text>
+
+  <!-- Divider -->
+  <line x1="20" y1="52" x2="460" y2="52" stroke="#333" stroke-width="1"/>
+
+  <!-- Metrics row -->
+  <!-- Temperature -->
+  <rect x="20" y="64" width="105" height="80" rx="8" fill="#252525"/>
+  <text x="72" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">Température</text>
+  <text x="72" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#ff9800">20.3</text>
+  <text x="72" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">°C</text>
+
+  <!-- pH -->
+  <rect x="135" y="64" width="105" height="80" rx="8" fill="#252525"/>
+  <text x="187" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">pH</text>
+  <text x="187" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#4caf50">7.2</text>
+  <text x="187" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">pH</text>
+
+  <!-- ORP -->
+  <rect x="250" y="64" width="105" height="80" rx="8" fill="#252525"/>
+  <text x="302" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">ORP</text>
+  <text x="302" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#4caf50">712</text>
+  <text x="302" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">mV</text>
+
+  <!-- Salt -->
+  <rect x="365" y="64" width="95" height="80" rx="8" fill="#252525"/>
+  <text x="412" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">Sel</text>
+  <text x="412" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#e0e0e0">3.8</text>
+  <text x="412" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">g/L</text>
+
+  <!-- Equipment section -->
+  <text x="20" y="176" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#999">Équipements</text>
+  <line x1="20" y1="186" x2="460" y2="186" stroke="#333" stroke-width="1"/>
+
+  <!-- Equipment rows -->
+  <!-- SE -->
+  <text x="20" y="214" font-family="Arial, sans-serif" font-size="13" fill="#e0e0e0">Électrolyseur (SE)</text>
+  <rect x="410" y="200" rx="8" width="50" height="22" fill="#4caf50"/>
+  <text x="435" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="white">ON</text>
+
+  <!-- pH -->
+  <text x="20" y="244" font-family="Arial, sans-serif" font-size="13" fill="#e0e0e0">Dosage pH</text>
+  <rect x="410" y="230" rx="8" width="50" height="22" fill="#4caf50"/>
+  <text x="435" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="white">ON</text>
+
+  <!-- ORP -->
+  <text x="20" y="274" font-family="Arial, sans-serif" font-size="13" fill="#e0e0e0">Dosage ORP</text>
+  <rect x="410" y="260" rx="8" width="50" height="22" fill="#666"/>
+  <text x="435" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#ccc">OFF</text>
+
+  <!-- Filtration -->
+  <text x="20" y="304" font-family="Arial, sans-serif" font-size="13" fill="#e0e0e0">Filtration</text>
+  <rect x="390" y="290" rx="8" width="70" height="22" fill="#1a237e"/>
+  <text x="425" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#64b5f6">Auto</text>
+
+  <!-- Boost -->
+  <text x="20" y="334" font-family="Arial, sans-serif" font-size="13" fill="#e0e0e0">Boost</text>
+  <rect x="410" y="320" rx="8" width="50" height="22" fill="#666"/>
+  <text x="435" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#ccc">OFF</text>
+</svg>
