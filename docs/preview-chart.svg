@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="300" viewBox="0 0 480 300">
+  <!-- Card background -->
+  <rect width="480" height="300" rx="12" fill="#1c1c1c"/>
+
+  <!-- Header -->
+  <text x="20" y="36" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#e0e0e0">Température</text>
+
+  <!-- Period selector -->
+  <rect x="310" y="16" rx="10" width="34" height="26" fill="transparent" stroke="#444" stroke-width="1"/>
+  <text x="327" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">6h</text>
+  <rect x="350" y="16" rx="10" width="34" height="26" fill="#03a9f4"/>
+  <text x="367" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="white">24h</text>
+  <rect x="390" y="16" rx="10" width="34" height="26" fill="transparent" stroke="#444" stroke-width="1"/>
+  <text x="407" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">7d</text>
+  <rect x="430" y="16" rx="10" width="34" height="26" fill="transparent" stroke="#444" stroke-width="1"/>
+  <text x="447" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">30d</text>
+
+  <!-- Current value -->
+  <text x="20" y="76" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#e0e0e0">20.3</text>
+  <text x="88" y="76" font-family="Arial, sans-serif" font-size="14" fill="#999">°C</text>
+  <text x="120" y="76" font-family="Arial, sans-serif" font-size="12" fill="#999">Min: 18.5 — Max: 21.1</text>
+
+  <!-- Chart area -->
+  <rect x="20" y="90" width="440" height="180" rx="4" fill="#222"/>
+
+  <!-- Y axis labels -->
+  <text x="16" y="100" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">22</text>
+  <text x="16" y="135" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">21</text>
+  <text x="16" y="170" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">20</text>
+  <text x="16" y="205" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">19</text>
+  <text x="16" y="240" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">18</text>
+
+  <!-- Grid lines -->
+  <line x1="25" y1="96" x2="455" y2="96" stroke="#333" stroke-width="0.5"/>
+  <line x1="25" y1="131" x2="455" y2="131" stroke="#333" stroke-width="0.5"/>
+  <line x1="25" y1="166" x2="455" y2="166" stroke="#333" stroke-width="0.5"/>
+  <line x1="25" y1="201" x2="455" y2="201" stroke="#333" stroke-width="0.5"/>
+  <line x1="25" y1="236" x2="455" y2="236" stroke="#333" stroke-width="0.5"/>
+
+  <!-- Temperature line (stepped) -->
+  <polyline points="30,170 70,170 70,140 120,140 120,132 180,132 180,130 230,130 230,132 260,132 260,170 280,170 280,200 310,200 310,210 340,210 340,195 370,195 370,170 400,170 400,155 430,155 430,148 450,148" fill="none" stroke="#ff9800" stroke-width="2.5"/>
+
+  <!-- Fill under line -->
+  <polyline points="30,170 70,170 70,140 120,140 120,132 180,132 180,130 230,130 230,132 260,132 260,170 280,170 280,200 310,200 310,210 340,210 340,195 370,195 370,170 400,170 400,155 430,155 430,148 450,148 450,270 30,270" fill="#ff9800" fill-opacity="0.08" stroke="none"/>
+
+  <!-- X axis labels -->
+  <text x="60" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">12:00</text>
+  <text x="145" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">16:00</text>
+  <text x="230" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">20:00</text>
+  <text x="315" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">00:00</text>
+  <text x="400" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">04:00</text>
+  <text x="450" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">08:00</text>
+</svg>

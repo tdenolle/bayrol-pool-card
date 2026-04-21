@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="330" viewBox="0 0 480 330">
+  <!-- Card background -->
+  <rect width="480" height="330" rx="12" fill="#1c1c1c"/>
+
+  <!-- Header -->
+  <text x="20" y="36" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#e0e0e0">Température &amp; Filtration</text>
+
+  <!-- Period selector -->
+  <rect x="310" y="16" rx="10" width="34" height="26" fill="transparent" stroke="#444" stroke-width="1"/>
+  <text x="327" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">6h</text>
+  <rect x="350" y="16" rx="10" width="34" height="26" fill="#03a9f4"/>
+  <text x="367" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="white">24h</text>
+  <rect x="390" y="16" rx="10" width="34" height="26" fill="transparent" stroke="#444" stroke-width="1"/>
+  <text x="407" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">7d</text>
+  <rect x="430" y="16" rx="10" width="34" height="26" fill="transparent" stroke="#444" stroke-width="1"/>
+  <text x="447" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">30d</text>
+
+  <!-- Current value with warning -->
+  <text x="20" y="76" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#ff9800">18.5</text>
+  <text x="88" y="76" font-family="Arial, sans-serif" font-size="14" fill="#999">°C</text>
+  <text x="120" y="76" font-family="Arial, sans-serif" font-size="12" fill="#ff9800">⚠ Filtration arrêtée</text>
+
+  <!-- Chart area -->
+  <rect x="20" y="90" width="440" height="200" rx="4" fill="#222"/>
+
+  <!-- Y axis labels -->
+  <text x="16" y="105" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">22°C</text>
+  <text x="16" y="145" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">21°C</text>
+  <text x="16" y="185" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">20°C</text>
+  <text x="16" y="225" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">19°C</text>
+  <text x="16" y="265" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#666">18°C</text>
+
+  <!-- Grid lines -->
+  <line x1="25" y1="101" x2="455" y2="101" stroke="#333" stroke-width="0.5"/>
+  <line x1="25" y1="141" x2="455" y2="141" stroke="#333" stroke-width="0.5"/>
+  <line x1="25" y1="181" x2="455" y2="181" stroke="#333" stroke-width="0.5"/>
+  <line x1="25" y1="221" x2="455" y2="221" stroke="#333" stroke-width="0.5"/>
+  <line x1="25" y1="261" x2="455" y2="261" stroke="#333" stroke-width="0.5"/>
+
+  <!-- Filtration OFF zone 1 (night) -->
+  <rect x="230" y="91" width="130" height="195" fill="#f44336" fill-opacity="0.12" rx="2"/>
+
+  <!-- Filtration OFF zone 2 (early morning) -->
+  <rect x="390" y="91" width="40" height="195" fill="#f44336" fill-opacity="0.12" rx="2"/>
+
+  <!-- Temperature line (stepped) -->
+  <polyline points="30,181 70,181 70,155 120,155 120,145 180,145 180,141 230,141 230,145 260,145 260,181 280,181 280,221 310,221 310,245 340,245 340,225 370,225 370,200 400,200 400,181 430,181 430,165 450,165" fill="none" stroke="#03a9f4" stroke-width="2.5"/>
+
+  <!-- X axis labels -->
+  <text x="60" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">12:00</text>
+  <text x="145" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">16:00</text>
+  <text x="230" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">20:00</text>
+  <text x="315" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">00:00</text>
+  <text x="400" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">04:00</text>
+  <text x="450" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">08:00</text>
+
+  <!-- Legend -->
+  <rect x="20" y="300" width="12" height="12" rx="2" fill="#03a9f4"/>
+  <text x="38" y="311" font-family="Arial, sans-serif" font-size="11" fill="#999">Température</text>
+  <rect x="140" y="300" width="12" height="12" rx="2" fill="#f44336" fill-opacity="0.3"/>
+  <text x="158" y="311" font-family="Arial, sans-serif" font-size="11" fill="#999">Filtration arrêtée</text>
+</svg>

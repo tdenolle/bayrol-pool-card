@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="180" viewBox="0 0 480 180">
+  <!-- Card background -->
+  <rect width="480" height="180" rx="12" fill="#1c1c1c"/>
+
+  <!-- Header -->
+  <text x="20" y="36" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#e0e0e0">Messages Piscine</text>
+
+  <!-- Warning alert -->
+  <rect x="20" y="52" width="440" height="44" rx="8" fill="#4a3000"/>
+  <rect x="20" y="52" width="4" height="44" rx="2" fill="#ff9800"/>
+  <text x="40" y="70" font-family="Arial, sans-serif" font-size="13" font-weight="600" fill="#ffb74d">⚠ Avertissement</text>
+  <text x="40" y="88" font-family="Arial, sans-serif" font-size="12" fill="#e0c080">Niveau de sel bas — vérifier le bac à sel</text>
+
+  <!-- Info alert -->
+  <rect x="20" y="104" width="440" height="44" rx="8" fill="#0d2e4a"/>
+  <rect x="20" y="104" width="4" height="44" rx="2" fill="#2196f3"/>
+  <text x="40" y="122" font-family="Arial, sans-serif" font-size="13" font-weight="600" fill="#64b5f6">ℹ Information</text>
+  <text x="40" y="140" font-family="Arial, sans-serif" font-size="12" fill="#90caf9">Prochain cycle de nettoyage dans 2 heures</text>
+
+  <!-- Count badge -->
+  <text x="440" y="36" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#999">2 messages</text>
+</svg>
