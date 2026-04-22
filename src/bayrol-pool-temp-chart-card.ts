@@ -369,6 +369,17 @@ export class BayrolPoolTempChartCard extends LitElement {
           annotation: {
             annotations,
           },
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: "x",
+            },
+            zoom: {
+              wheel: { enabled: true, modifierKey: undefined },
+              pinch: { enabled: true },
+              mode: "x",
+            },
+          },
         },
         scales: {
           x: {
@@ -386,6 +397,12 @@ export class BayrolPoolTempChartCard extends LitElement {
           },
         },
       },
+    });
+
+    // Double-click to reset zoom
+    this._canvas.addEventListener("dblclick", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (this._chart as any)?.resetZoom();
     });
   }
 
@@ -410,7 +427,16 @@ export class BayrolPoolTempChartCard extends LitElement {
             if (win["chartjs-plugin-annotation"]) {
               win.ChartAnnotation = win["chartjs-plugin-annotation"];
             }
-            resolve();
+            // Zoom plugin (zoom, pan, pinch)
+            const zoom = document.createElement("script");
+            zoom.src =
+              "https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2/dist/chartjs-plugin-zoom.min.js";
+            zoom.onload = () => resolve();
+            zoom.onerror = () => {
+              // Zoom is optional — chart works without it
+              resolve();
+            };
+            document.head.appendChild(zoom);
           };
           annotation.onerror = () => {
             // Annotation is optional — chart works without it, just no background shading

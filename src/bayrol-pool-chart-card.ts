@@ -172,7 +172,20 @@ export class BayrolPoolChartCard extends LitElement {
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: "index", intersect: false },
-        plugins: { legend: { display: false } },
+        plugins: {
+          legend: { display: false },
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: "x",
+            },
+            zoom: {
+              wheel: { enabled: true, modifierKey: undefined },
+              pinch: { enabled: true },
+              mode: "x",
+            },
+          },
+        },
         scales: {
           x: {
             type: "time",
@@ -190,6 +203,12 @@ export class BayrolPoolChartCard extends LitElement {
         },
       },
     });
+
+    // Double-click to reset zoom
+    this._canvas.addEventListener("dblclick", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (this._chart as any)?.resetZoom();
+    });
   }
 
   private _loadChartJs(): Promise<void> {
@@ -202,7 +221,18 @@ export class BayrolPoolChartCard extends LitElement {
         const adapter = document.createElement("script");
         adapter.src =
           "https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3/dist/chartjs-adapter-date-fns.bundle.min.js";
-        adapter.onload = () => resolve();
+        adapter.onload = () => {
+          // Zoom plugin (zoom, pan, pinch)
+          const zoom = document.createElement("script");
+          zoom.src =
+            "https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2/dist/chartjs-plugin-zoom.min.js";
+          zoom.onload = () => resolve();
+          zoom.onerror = () => {
+            // Zoom is optional — chart works without it
+            resolve();
+          };
+          document.head.appendChild(zoom);
+        };
         adapter.onerror = () => reject(new Error("Failed to load chart adapter"));
         document.head.appendChild(adapter);
       };
