@@ -23,9 +23,10 @@ console.info(
 );
 
 // Register cards in HA's custom card picker
-(window as unknown as Record<string, unknown>).customCards = (
-  (window as unknown as Record<string, unknown>).customCards as unknown[] || []
-).concat([
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const w = window as any;
+w.customCards = w.customCards || [];
+w.customCards.push(
   {
     type: "bayrol-pool-dashboard-card",
     name: "Bayrol Pool Dashboard",
@@ -54,4 +55,4 @@ console.info(
     preview: true,
     documentationURL: "https://github.com/tdenolle/bayrol-pool-card",
   },
-]);
+);
