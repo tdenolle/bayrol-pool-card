@@ -338,7 +338,7 @@ export class BayrolPoolTempChartCard extends LitElement {
             data: this._tempHistory,
             borderColor: color,
             backgroundColor: `${color}22`,
-            borderWidth: 2,
+            borderWidth: 1.5,
             fill: false,
             tension: 0,
             stepped: "before",
@@ -436,8 +436,9 @@ export class BayrolPoolTempChartCard extends LitElement {
     const title = this._config.title || "Température";
     const unit = (entity?.attributes.unit_of_measurement as string) || "°C";
 
-    const min = entity?.attributes["min"] as string | undefined;
-    const max = entity?.attributes["max"] as string | undefined;
+    // Compute min/max from actual history data
+    const dataMin = this._tempHistory.length > 0 ? Math.min(...this._tempHistory.map((p) => p.y)).toFixed(1) : undefined;
+    const dataMax = this._tempHistory.length > 0 ? Math.max(...this._tempHistory.map((p) => p.y)).toFixed(1) : undefined;
 
     // Check current filtration state
     const flowId = this._getEntityId("flow_in");
@@ -470,8 +471,8 @@ export class BayrolPoolTempChartCard extends LitElement {
           ${!filtrationOn && numValue !== null
             ? html`<span class="min-max" style="color: var(--warning-color, #ff9800)">⚠ Filtration arrêtée</span>`
             : nothing}
-          ${min !== undefined && max !== undefined
-            ? html`<span class="min-max">Min: ${min} — Max: ${max}</span>`
+          ${dataMin !== undefined && dataMax !== undefined
+            ? html`<span class="min-max">Min: ${dataMin} — Max: ${dataMax}</span>`
             : nothing}
         </div>
 

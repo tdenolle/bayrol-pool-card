@@ -159,9 +159,10 @@ export class BayrolPoolChartCard extends LitElement {
             data: this._history,
             borderColor: color,
             backgroundColor: `${color}22`,
-            borderWidth: 2,
-            fill: true,
-            tension: 0.3,
+            borderWidth: 1.5,
+            fill: false,
+            tension: 0,
+            stepped: "before",
             pointRadius: 0,
             pointHitRadius: 8,
           },
@@ -227,8 +228,9 @@ export class BayrolPoolChartCard extends LitElement {
       else if (this._config.entity_key === "mv_se") valueColor = getOrpColor(numValue);
     }
 
-    const min = entity?.attributes["min"] as string | undefined;
-    const max = entity?.attributes["max"] as string | undefined;
+    // Compute min/max from actual history data
+    const dataMin = this._history.length > 0 ? Math.min(...this._history.map((p) => p.y)).toFixed(1) : undefined;
+    const dataMax = this._history.length > 0 ? Math.max(...this._history.map((p) => p.y)).toFixed(1) : undefined;
 
     return html`
       <ha-card>
@@ -253,8 +255,8 @@ export class BayrolPoolChartCard extends LitElement {
             ${numValue !== null ? numValue : "--"}
           </span>
           ${unit ? html`<span class="unit">${unit}</span>` : nothing}
-          ${min !== undefined && max !== undefined
-            ? html`<span class="min-max">Min: ${min} — Max: ${max}</span>`
+          ${dataMin !== undefined && dataMax !== undefined
+            ? html`<span class="min-max">Min: ${dataMin} — Max: ${dataMax}</span>`
             : nothing}
         </div>
 
