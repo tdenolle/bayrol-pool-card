@@ -5,12 +5,17 @@
  *   - bayrol-pool-dashboard-card   : Full pool overview (metrics + equipment)
  *   - bayrol-pool-chart-card       : Historical chart for any pool entity
  *   - bayrol-pool-temp-chart-card  : Temperature + filtration status chart
+ *
+ * Strategy:
+ *   - bayrol-pool                  : Auto-generated dashboard (no YAML needed)
  */
 
 import "./bayrol-pool-dashboard-card";
 import "./bayrol-pool-chart-card";
 import "./bayrol-pool-temp-chart-card";
 import "./bayrol-pool-messages-card";
+import "./strategy/bayrol-pool-strategy";
+import "./strategy/bayrol-pool-strategy-editor";
 
 declare const __VERSION__: string;
 const CARD_VERSION = __VERSION__;
@@ -56,3 +61,13 @@ w.customCards.push(
     documentationURL: "https://github.com/tdenolle/bayrol-pool-card",
   },
 );
+
+// Register dashboard strategy in HA's new dashboard dialog (HA 2026.5+)
+w.customStrategies = w.customStrategies || [];
+w.customStrategies.push({
+  type: "bayrol-pool",
+  strategyType: "dashboard",
+  name: "Bayrol Pool Access",
+  description: "Tableau de bord complet pour votre piscine — métriques, équipements, graphiques et alertes.",
+  documentationURL: "https://github.com/tdenolle/bayrol-pool-card",
+});
