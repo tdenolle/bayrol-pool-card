@@ -20,6 +20,13 @@ export interface BayrolPoolStrategyConfig {
   title?: string;
 }
 
+export interface BayrolDevice {
+  serial: string;
+  prefix: string;
+  /** Friendly label built from entity naming, e.g. "bayrol – 1234567" */
+  label: string;
+}
+
 interface LovelaceViewConfig {
   title: string;
   path: string;
@@ -33,22 +40,25 @@ interface LovelaceDashboardConfig {
   views: LovelaceViewConfig[];
 }
 
+const DEVICE_PATTERN = /^sensor\.(.+?)_(\d{5,})_(temperature|ph|mv_se|salt|status)$/;
+
 /**
- * Auto-detect a Bayrol Pool Access device serial from HA entity states.
- * Looks for sensor entities whose entity_id contains "bayrol" or typical
- * bayrol keys like "_ph" / "_temperature" with a numeric serial-like suffix.
+ * Detect all Bayrol Pool Access devices from HA entity states.
+ * Returns a deduplicated list of { serial, prefix, label }.
  */
-function detectDeviceSerial(hass: HomeAssistant): string | undefined {
-  // Look for entities matching the pattern sensor.<prefix>_<serial>_<key>
-  // e.g. sensor.bayrol_1234567_temperature
-  const pattern = /^sensor\.(.+?)_(\d{5,})_(temperature|ph|mv_se|salt|status)$/;
+export function detectBayrolDevices(hass: HomeAssistant): BayrolDevice[] {
+  const seen = new Map<string, BayrolDevice>();
   for (const entityId of Object.keys(hass.states)) {
-    const m = entityId.match(pattern);
+    const m = entityId.match(DEVICE_PATTERN);
     if (m) {
-      return m[2];
+      const prefix = m[1];
+      const serial = m[2];
+      if (!seen.has(serial)) {
+        seen.set(serial, { serial, prefix, label: `${prefix} – ${serial}` });
+      }
     }
   }
-  return undefined;
+  return Array.from(seen.values());
 }
 
 class BayrolPoolDashboardStrategy extends HTMLElement {
@@ -63,7 +73,8 @@ class BayrolPoolDashboardStrategy extends HTMLElement {
     config: BayrolPoolStrategyConfig,
     hass: HomeAssistant,
   ): Promise<LovelaceDashboardConfig> {
-    const serial = config.device_serial || detectDeviceSerial(hass) || "";
+    const devices = detectBayrolDevices(hass);
+    const serial = config.device_serial || (devices.length > 0 ? devices[0].serial : "");
     const prefix = config.entity_prefix;
     const showEquipment = config.show_equipment !== false;
     const showCharts = config.show_charts !== false;

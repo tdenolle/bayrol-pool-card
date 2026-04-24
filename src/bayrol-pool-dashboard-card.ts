@@ -3,6 +3,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import { cardStyles } from "./styles";
 import { HomeAssistant, HassEntity, LovelaceCardConfig } from "./types";
 import { findEntityByKey, parseNumericState, getPhColor, getOrpColor } from "./utils";
+import { BayrolDevice, detectBayrolDevices } from "./strategy/bayrol-pool-strategy";
 
 interface BayrolPoolDashboardConfig extends LovelaceCardConfig {
   title?: string;
@@ -179,9 +180,47 @@ export class BayrolPoolDashboardCard extends LitElement {
 export class BayrolPoolDashboardEditor extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: BayrolPoolDashboardConfig;
+  @state() private _devices: BayrolDevice[] = [];
+  @state() private _manualSerial = false;
 
   public setConfig(config: BayrolPoolDashboardConfig): void {
     this._config = config;
+    this._refreshDevices();
+  }
+
+  updated(changedProps: Map<string, unknown>): void {
+    if (changedProps.has("hass")) {
+      this._refreshDevices();
+    }
+  }
+
+  private _refreshDevices(): void {
+    if (!this.hass) return;
+    this._devices = detectBayrolDevices(this.hass);
+    if (
+      this._config?.device_serial &&
+      !this._devices.some((d) => d.serial === this._config!.device_serial)
+    ) {
+      this._manualSerial = true;
+    }
+  }
+
+  private _dispatchChanged(config: BayrolPoolDashboardConfig): void {
+    this.dispatchEvent(
+      new CustomEvent("config-changed", { detail: { config } })
+    );
+  }
+
+  private _deviceSelected(ev: Event): void {
+    if (!this._config) return;
+    const value = (ev.target as HTMLSelectElement).value;
+    if (value === "__manual__") {
+      this._manualSerial = true;
+      return;
+    }
+    this._manualSerial = false;
+    const newConfig = { ...this._config, device_serial: value };
+    this._dispatchChanged(newConfig);
   }
 
   private _valueChanged(ev: Event): void {
@@ -190,15 +229,17 @@ export class BayrolPoolDashboardEditor extends LitElement {
     const key = target.configValue as string;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const newConfig = { ...this._config, [key]: value };
-    this.dispatchEvent(
-      new CustomEvent("config-changed", { detail: { config: newConfig } })
-    );
+    this._dispatchChanged(newConfig);
   }
 
   protected render(): TemplateResult {
     if (!this._config) {
       return html``;
     }
+
+    const currentSerial = this._config.device_serial || "";
+    const hasDevices = this._devices.length > 0;
+
     return html`
       <div style="padding: 16px;">
         <ha-textfield
@@ -207,13 +248,44 @@ export class BayrolPoolDashboardEditor extends LitElement {
           .configValue="${"title"}"
           @input="${this._valueChanged}"
         ></ha-textfield>
-        <ha-textfield
-          label="Numéro de série du device (requis)"
-          .value="${this._config.device_serial || ""}"
-          .configValue="${"device_serial"}"
-          @input="${this._valueChanged}"
-          required
-        ></ha-textfield>
+
+        ${hasDevices
+          ? html`
+              <ha-select
+                label="Appareil Bayrol"
+                .value="${this._manualSerial ? "__manual__" : currentSerial}"
+                @selected="${this._deviceSelected}"
+                @closed="${(ev: Event) => ev.stopPropagation()}"
+                fixedMenuPosition
+                style="width: 100%; margin-top: 8px;"
+              >
+                ${this._devices.map(
+                  (d) => html`<ha-list-item .value="${d.serial}">${d.label}</ha-list-item>`,
+                )}
+                <ha-list-item value="__manual__">Saisie manuelle…</ha-list-item>
+              </ha-select>
+              ${this._manualSerial
+                ? html`
+                    <ha-textfield
+                      label="Numéro de série"
+                      .value="${currentSerial}"
+                      .configValue="${"device_serial"}"
+                      @input="${this._valueChanged}"
+                      style="margin-top: 8px;"
+                    ></ha-textfield>
+                  `
+                : nothing}
+            `
+          : html`
+              <ha-textfield
+                label="Numéro de série du device (requis)"
+                .value="${currentSerial}"
+                .configValue="${"device_serial"}"
+                @input="${this._valueChanged}"
+                required
+              ></ha-textfield>
+            `}
+
         <ha-textfield
           label="Préfixe entité (optionnel)"
           .value="${this._config.entity_prefix || ""}"
