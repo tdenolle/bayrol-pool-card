@@ -64,7 +64,7 @@ export function detectBayrolDevices(hass: HomeAssistant): BayrolDevice[] {
 class BayrolPoolDashboardStrategy extends HTMLElement {
   static getCreateSuggestions(_hass: HomeAssistant) {
     return {
-      title: "Bayrol Pool Access",
+      title: "Bayrol Poolaccess",
       icon: "mdi:pool",
     };
   }
