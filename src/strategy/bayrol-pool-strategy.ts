@@ -154,4 +154,26 @@ customElements.define(
   BayrolPoolDashboardStrategy,
 );
 
+// Register in HA's custom strategy discovery registry so the strategy
+// appears in the "Add dashboard" picker (introduced in HA 2026.5).
+interface CustomStrategiesWindow {
+  customStrategies?: Array<{
+    type: string;
+    name?: string;
+    description?: string;
+    documentationURL?: string;
+    strategyType: "dashboard" | "view" | "section";
+  }>;
+}
+const _win = window as CustomStrategiesWindow;
+if (!Array.isArray(_win.customStrategies)) {
+  _win.customStrategies = [];
+}
+_win.customStrategies.push({
+  type: "bayrol-pool",
+  name: "Bayrol Pool Access",
+  description: "Génère automatiquement un tableau de bord complet pour Bayrol Pool Access.",
+  strategyType: "dashboard",
+});
+
 export { BayrolPoolDashboardStrategy };
