@@ -61,13 +61,3 @@ w.customCards.push(
     documentationURL: "https://github.com/tdenolle/bayrol-pool-card",
   },
 );
-
-// Register dashboard strategy in HA's new dashboard dialog (HA 2026.5+)
-w.customStrategies = w.customStrategies || [];
-w.customStrategies.push({
-  type: "bayrol-pool",
-  strategyType: "dashboard",
-  name: "Bayrol Pool Access",
-  description: "Tableau de bord complet pour votre piscine — métriques, équipements, graphiques et alertes.",
-  documentationURL: "https://github.com/tdenolle/bayrol-pool-card",
-});
